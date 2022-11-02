@@ -1,0 +1,16 @@
+description: |
+  Install the argocd client.
+  Requirements: curl
+
+parameters:
+  argocd-cli-version:
+    type: string
+    default: "v2.5.1"
+    description: the argocd client version to install. e.g. v2.5.1
+
+steps:
+  - run:
+      name: Install and init the argocd client (if necessary)
+      environment:
+        ARGO_CLI_VERSION: << parameters.argocd-cli-version >>
+      command: <<include(scripts/install-argocd-client.sh)>>

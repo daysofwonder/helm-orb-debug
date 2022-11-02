@@ -27,7 +27,6 @@ workflows:
             [orb-tools/lint, orb-tools/review, orb-tools/pack, shellcheck/check]
           # Use a context to hold your publishing token.
           github-token: GHI_TOKEN
-          circleci-token: ORB_PARAM_ORB_PUB_TOKEN
           context: orb-publisher
           pub-type: production
           filters: *filters

@@ -1,41 +1,40 @@
-if [ -n "${ORB_PARAM_NAMESPACE}" ]; then
+set -euox
+set
+if [[ -n "${ORB_PARAM_NAMESPACE}" ]]; then
 	set -- "$@" --namespace="${ORB_PARAM_NAMESPACE}"
 fi
-if [ -n "${TIMEOUT}" ]; then
+if [[ -n "${TIMEOUT}" ]]; then
 	set -- "$@" --timeout "${TIMEOUT}"
 fi
-if [ -n "${NO_HOOKS}" ]; then
-	set -- "$@" --no-hooks="${NO_HOOKS}"
+if [[ "${NO_HOOKS}" == true ]]; then
+	set -- "$@" --no-hooks
 fi
-if [ "${RECREATE_PODS}" == "true" ]; then
-	set -- "$@" --recreate-pods
-fi
-if [ "${ATOMIC}" == "true" ]; then
+if [[ "${ATOMIC}" == true ]]; then
 	set -- "$@" --atomic
 fi
-if [ "${ORB_PARAM_WAIT}" == "true" ]; then
+if [[ "${ORB_PARAM_WAIT}" == true ]]; then
 	set -- "$@" --wait
 fi
-if [ -n "${DEVEL}" ]; then
-	set -- "$@" --devel "${DEVEL}"
+if [[ "${DEVEL}" == true ]]; then
+	set -- "$@" --devel
 fi
-if [ "${DRY_RUN}" == "true" ]; then
+if [[ "${DRY_RUN}" == true ]]; then
 	set -- "$@" --dry-run
 fi
-if [ "${RESET_VALUES}" == "true" ]; then
+if [[ "${RESET_VALUES}" == true ]]; then
 	set -- "$@" --reset-values
 fi
-if [ "${REUSE_VALUES}" == "true" ]; then
+if [[ "${REUSE_VALUES}" == true ]]; then
 	set -- "$@" --reuse-values
 fi
-if [ -n "${VALUES}" ]; then
-	set -- "$@" --values "$(eval ${VALUES})"
+if [[ -n "${VALUES}" ]]; then
+	set -- "$@" --values "$(eval "${VALUES}")"
 fi
-if [ -n "${VALUES_TO_OVERRIDE}" ]; then
-	set -- "$@" --set "$(eval ${VALUES_TO_OVERRIDE})"
+if [[ -n "${VALUES_TO_OVERRIDE}" ]]; then
+	set -- "$@" --set "$(eval "${VALUES_TO_OVERRIDE}")"
 fi
-if [ -n "${VERSION}" ]; then
-	set -- "$@" --version="${VERSION}"
+if [[ -n "${VERSION}" ]]; then
+	set -- "$@" --version="$(eval "${VERSION}")"
 fi
 
 helm repo add "${ORB_PARAM_RELEASE_NAME}" "${ORB_PARAM_REPO}"
